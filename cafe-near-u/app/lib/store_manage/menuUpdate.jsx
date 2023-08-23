@@ -9,7 +9,7 @@ export default async function menuUpdate({ token, menu }) {
         headers: header,
         body,
         method: "PUT",
-    }).then((res) => res.status);
+    }).then((res) => res.json());
 
     return data;
 }
