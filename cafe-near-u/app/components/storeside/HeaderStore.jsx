@@ -1,6 +1,6 @@
 import { Button } from "../MaterialTailwind";
 
-export default function HeaderStore({ handleLogout }) {
+export default function HeaderStore() {
     return (
         <div className="border-b ">
             <div className="lg:container lg:mx-auto flex justify-between sticky top-0">
@@ -10,7 +10,6 @@ export default function HeaderStore({ handleLogout }) {
                 <Button
                     variant="outlined"
                     className="my-4 text-sm mr-2 md:mr-0"
-                    onClick={handleLogout}
                 >
                     登出店家後台
                 </Button>
