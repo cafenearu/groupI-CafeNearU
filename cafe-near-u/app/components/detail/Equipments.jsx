@@ -8,7 +8,7 @@ function Icon({ type }) {
                 version="1.1"
                 xmlns="http://www.w3.org/2000/svg"
                 xmlnsXlink="http://www.w3.org/1999/xlink"
-                class="si-glyph si-glyph-socket"
+                className="si-glyph si-glyph-socket"
                 fill="#000000"
             >
                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -36,13 +36,13 @@ function Icon({ type }) {
                                 {" "}
                                 <path
                                     d="M7.969,12.979 C5.229,12.979 3.002,10.751 3.002,8.011 C3.002,5.272 5.229,3.04 7.969,3.04 C10.708,3.04 12.938,5.271 12.938,8.011 C12.938,10.751 10.708,12.979 7.969,12.979 L7.969,12.979 Z M8.008,3.903 C5.761,3.903 3.933,5.749 3.933,8.017 C3.933,10.285 5.761,12.13 8.008,12.13 C10.252,12.13 12.082,10.284 12.082,8.017 C12.082,5.749 10.252,3.903 8.008,3.903 L8.008,3.903 Z"
-                                    class="si-glyph-fill"
+                                    className="si-glyph-fill"
                                 >
                                     {" "}
                                 </path>{" "}
                                 <path
                                     d="M15.916,15.918 L0,15.918 L0,0 L15.916,0 L15.916,15.918 L15.916,15.918 Z M0.969,15.031 L15.031,15.031 L15.031,0.937 L0.969,0.937 L0.969,15.031 L0.969,15.031 Z"
-                                    class="si-glyph-fill"
+                                    className="si-glyph-fill"
                                 >
                                     {" "}
                                 </path>{" "}
@@ -52,7 +52,7 @@ function Icon({ type }) {
                                 y="7"
                                 width="0.969"
                                 height="1.812"
-                                class="si-glyph-fill"
+                                className="si-glyph-fill"
                             >
                                 {" "}
                             </rect>{" "}
@@ -61,7 +61,7 @@ function Icon({ type }) {
                                 y="7"
                                 width="0.969"
                                 height="1.812"
-                                class="si-glyph-fill"
+                                className="si-glyph-fill"
                             >
                                 {" "}
                             </rect>{" "}
@@ -153,7 +153,7 @@ function Icon({ type }) {
                     <path
                         fill="var(--ci-primary-color, #4f4f4f)"
                         d="M16,240V360H360V240H16Zm312,88H48V272H328Z"
-                        class="ci-primary"
+                        className="ci-primary"
                     ></path>{" "}
                     <rect
                         width="32"
@@ -161,7 +161,7 @@ function Icon({ type }) {
                         x="384"
                         y="240"
                         fill="var(--ci-primary-color, #4f4f4f)"
-                        class="ci-primary"
+                        className="ci-primary"
                     ></rect>{" "}
                     <rect
                         width="32"
@@ -169,17 +169,17 @@ function Icon({ type }) {
                         x="440"
                         y="240"
                         fill="var(--ci-primary-color, #4f4f4f)"
-                        class="ci-primary"
+                        className="ci-primary"
                     ></rect>{" "}
                     <path
                         fill="var(--ci-primary-color, #4f4f4f)"
                         d="M385.428,173.3a31.982,31.982,0,0,1,2.32-38.418,63.745,63.745,0,0,0,3.479-78.69L385.377,48H348.8l-1.82,1.3,18.207,25.49a31.807,31.807,0,0,1-1.736,39.265,64.1,64.1,0,0,0-4.649,76.993L364.77,200h38.46Z"
-                        class="ci-primary"
+                        className="ci-primary"
                     ></path>{" "}
                     <path
                         fill="var(--ci-primary-color, #4f4f4f)"
                         d="M457.428,173.3a31.982,31.982,0,0,1,2.32-38.418,63.745,63.745,0,0,0,3.479-78.69L457.377,48H420.8l-1.82,1.3,18.207,25.49a31.807,31.807,0,0,1-1.736,39.265,64.1,64.1,0,0,0-4.649,76.993L436.77,200h38.46Z"
-                        class="ci-primary"
+                        className="ci-primary"
                     ></path>{" "}
                 </g>
             </svg>

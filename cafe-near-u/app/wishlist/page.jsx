@@ -10,10 +10,12 @@ import {
     Button,
     ButtonGroup,
 } from "@material-tailwind/react";
+
 import Header from "../components/header";
 import Footer from "../components/footer";
 import Wish from "../components/wishitem";
 import Comment from "../components/comment";
+
 import Cookies from "js-cookie";
 import { useState, useEffect } from "react";
 

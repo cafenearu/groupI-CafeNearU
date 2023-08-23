@@ -5,6 +5,7 @@ import Cookies from "js-cookie";
 const useFetchHomepage = () => {
     const [homepage, sethomepage] = useState();
 
+
     const fetchHomepage = async () => {
         try {
             const token = Cookies.get("token");
@@ -19,6 +20,7 @@ const useFetchHomepage = () => {
             );
             const responseData = await responseprofile.json();
             // console.log(responseData);
+
 
             if (responseprofile.ok) {
                 console.log("獲取首頁成功");

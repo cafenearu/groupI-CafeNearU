@@ -18,21 +18,21 @@ import {
 } from "@material-tailwind/react";
 
 export default function GuestSignupForm() {
-    const registerValidationSchema = Yup.object().shape({
-        name5: Yup.string().required("Name is required"),
-        email5: Yup.string()
-            .required("Email is required")
-            .email("Invalid email address"),
-        password5: Yup.string()
-            .required("Password is required")
-            .matches(
-                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
-                "Password must contain uppercase letter, lowercase letter, and number"
-            ),
-        repassword5: Yup.string()
-            .required("Please confirm your password")
-            .oneOf([Yup.ref("password5"), null], "Passwords must match"),
-    });
+  const registerValidationSchema = Yup.object().shape({
+    name5: Yup.string().required("Name is required"),
+    email5: Yup.string()
+      .required("Email is required")
+      .email("Invalid email address"),
+    password5: Yup.string()
+      .required("Password is required")
+      .matches(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
+        "Password must contain uppercase letter, lowercase letter, and 8 number"
+      ),
+    repassword5: Yup.string()
+      .required("Please confirm your password")
+      .oneOf([Yup.ref("password5"), null], "Passwords must match"),
+  });
 
     const formikRegister = useFormik({
         initialValues: {

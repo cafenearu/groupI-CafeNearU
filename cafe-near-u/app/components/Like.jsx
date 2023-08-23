@@ -16,7 +16,7 @@ import { useState, useEffect } from "react";
 
 import useFetchWishlist from "../ApiHook/useFetchWishlist.jsx";
 
-export default function Addwish() {
+export default function Addwish({ handleOpe }) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen((cur) => !cur);
   const { userWishlist, fetchWishlist } = useFetchWishlist();
@@ -47,7 +47,6 @@ export default function Addwish() {
       );
       const responseData = await response.json();
       console.log(responseData);
-
       if (response.ok) {
         console.log("把店家新增到心願單成功");
       } else {
@@ -67,6 +66,13 @@ export default function Addwish() {
           </div>
           <hr className="border-gray-300 mb-4" />
           <div className="flex flex-wrap justify-center ">
+            {!userWishlist.length && (
+              <img
+                src="../cat.gif"
+                alt="cafe"
+                className=" hidden md:block w-full md:w-[40%] h-28 text-gray-600 md:mt-0"
+              />
+            )}
             {userWishlist.map((data) => (
               <div key={data.id} className={"md:w-[45%] w-[100%]  p-2"}>
                 <>
@@ -111,7 +117,7 @@ export default function Addwish() {
           handler={handleOpen}
           className="bg-transparent shadow-none"
         >
-          <Addtowishlist handleOpen={handleOpen} />
+          <Addtowishlist />
         </Dialog>
       </div>
     </>

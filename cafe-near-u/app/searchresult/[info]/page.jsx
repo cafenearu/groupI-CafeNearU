@@ -12,6 +12,7 @@ import StoreCard from "../../components/StoreCard.jsx";
 import Cookies from "js-cookie";
 
 export default function h() {
+
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen((cur) => !cur);
     const token = Cookies.get("token");
@@ -54,6 +55,7 @@ export default function h() {
             }
         } catch (error) {
             console.error("關鍵字搜尋，請求錯誤:", error);
+
         }
     };
 

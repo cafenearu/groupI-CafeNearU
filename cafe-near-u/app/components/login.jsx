@@ -18,43 +18,44 @@ import {
 } from "@material-tailwind/react";
 
 export default function Login() {
-    const [activeButton, setActiveButton] = useState("guest");
-    const [dialogOpen, setDialogOpen] = useState(true);
-    const [url, seturl] = useState(
-        "https://13.211.10.154/api/1.0/customers/signin"
-    );
-    const [type, settype] = useState(
-        "https://13.211.10.154/api/1.0/customers/signin"
-    );
-    const handleButtonClick = (buttonType) => {
-        setActiveButton(buttonType);
-    };
-    useEffect(() => {
-        if (activeButton === "guest") {
-            seturl("https://13.211.10.154/api/1.0/customers/signin");
-        } else {
-            seturl("https://13.211.10.154/api/1.0/shop-owners/signin");
-        }
-    }, [activeButton]);
-    const loginValidationSchema = Yup.object().shape({
-        email1: Yup.string()
-            .required("Email is required")
-            .email("Invalid email address"),
-        password1: Yup.string()
-            .required("Password is required")
-            .matches(
-                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
-                "Password must contain uppercase letter, lowercase letter, and number"
-            ),
-    });
-    const formikLogin = useFormik({
-        initialValues: {
-            email1: "",
-            password1: "",
-        },
-        validationSchema: loginValidationSchema,
-        onSubmit: async (values) => {
-            const { email1, password1 } = values;
+
+  const [activeButton, setActiveButton] = useState("guest");
+  const [dialogOpen, setDialogOpen] = useState(true);
+  const [url, seturl] = useState(
+    "https://13.211.10.154/api/1.0/customers/signin"
+  );
+  const [type, settype] = useState(
+    "https://13.211.10.154/api/1.0/customers/signin"
+  );
+  const handleButtonClick = (buttonType) => {
+    setActiveButton(buttonType);
+  };
+  useEffect(() => {
+    if (activeButton === "guest") {
+      seturl("https://13.211.10.154/api/1.0/customers/signin");
+    } else {
+      seturl("https://13.211.10.154/api/1.0/shop-owners/signin");
+    }
+  }, [activeButton]);
+  const loginValidationSchema = Yup.object().shape({
+    email1: Yup.string()
+      .required("Email is required")
+      .email("Invalid email address"),
+    password1: Yup.string()
+      .required("Password is required")
+      .matches(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
+        "Password must contain uppercase letter, lowercase letter, and 8 number"
+      ),
+  });
+  const formikLogin = useFormik({
+    initialValues: {
+      email1: "",
+      password1: "",
+    },
+    validationSchema: loginValidationSchema,
+    onSubmit: async (values) => {
+      const { email1, password1 } = values;
 
             try {
                 const loginResponse = await fetch(url, {

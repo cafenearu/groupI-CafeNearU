@@ -26,26 +26,27 @@ export default function GuestSignupForm() {
         setUsername(event.target.value);
     };
 
-    const handleButtonClick = (buttonType) => {
-        setActiveButton(buttonType);
-    };
-    //客人註冊
-    const registerValidationSchema = Yup.object().shape({
-        name: Yup.string().required("Name is required"),
-        school: Yup.string().required("School is required"),
-        email: Yup.string()
-            .required("Email is required")
-            .email("Invalid email address"),
-        password: Yup.string()
-            .required("Password is required")
-            .matches(
-                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
-                "Password must contain uppercase letter, lowercase letter, and number"
-            ),
-        repassword: Yup.string()
-            .required("Please confirm your password")
-            .oneOf([Yup.ref("password"), null], "Passwords must match"),
-    });
+
+  const handleButtonClick = (buttonType) => {
+    setActiveButton(buttonType);
+  };
+  //客人註冊
+  const registerValidationSchema = Yup.object().shape({
+    name: Yup.string().required("Name is required"),
+    school: Yup.string().required("School is required"),
+    email: Yup.string()
+      .required("Email is required")
+      .email("Invalid email address"),
+    password: Yup.string()
+      .required("Password is required")
+      .matches(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
+        "Password must contain uppercase letter, lowercase letter, and 8 number"
+      ),
+    repassword: Yup.string()
+      .required("Please confirm your password")
+      .oneOf([Yup.ref("password"), null], "Passwords must match"),
+  });
 
     const formikRegister = useFormik({
         initialValues: {

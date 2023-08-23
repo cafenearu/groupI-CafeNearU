@@ -28,22 +28,22 @@ export default function ChangePassword() {
         setUsername(event.target.value);
     };
 
-    const handleButtonClick = (buttonType) => {
-        setActiveButton(buttonType);
-    };
-    //註冊
-    const registerValidationSchema = Yup.object().shape({
-        password3: Yup.string()
-            .required("Password is required")
-            .matches(
-                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
-                "Password must contain uppercase letter, lowercase letter, and number"
-            ),
-        repassword3: Yup.string()
-            .required("Please confirm your password")
-            .oneOf([Yup.ref("password3"), null], "Passwords must match"),
-    });
 
+  const handleButtonClick = (buttonType) => {
+    setActiveButton(buttonType);
+  };
+  //註冊
+  const registerValidationSchema = Yup.object().shape({
+    password3: Yup.string()
+      .required("Password is required")
+      .matches(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
+        "Password must contain uppercase letter, lowercase letter, and 8 number"
+      ),
+    repassword3: Yup.string()
+      .required("Please confirm your password")
+      .oneOf([Yup.ref("password3"), null], "Passwords must match"),
+  });
     const formikRegister = useFormik({
         initialValues: {
             password3: "",

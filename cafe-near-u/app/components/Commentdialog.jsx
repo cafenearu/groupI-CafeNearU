@@ -2,6 +2,7 @@
 "use client";
 
 import { useState } from "react";
+import useAddComment from "../ApiHook/useAddComment"; // 請確保路徑正確
 
 import {
   Card,
@@ -12,28 +13,44 @@ import {
   Textarea,
 } from "@material-tailwind/react";
 
-export default function Comment() {
+export default function Commentdialog({ handleOpen }) {
   const [ratedserve, setratedserve] = useState(4);
   const [ratedfood, setratedfood] = useState(4);
   const [ratednet, setratednet] = useState(4);
   const [ratedfu, setratedfu] = useState(4);
   const [ratedclean, setratedclean] = useState(4);
   const [ratedall, setratedall] = useState(4);
-  const [activeButton, setActiveButton] = useState("guest");
+  const [activeButton, setActiveButton] = useState(true);
+  const [word, setword] = useState("");
 
   const handleButtonClick = (buttonType) => {
     setActiveButton(buttonType);
   };
+  const { useComment } = useAddComment(
+    word,
+    activeButton,
+    ratedall,
+    ratedclean,
+    ratedserve,
+    ratedfood,
+    ratednet,
+    ratedfu
+  );
+
+  const handleCommentSubmit = () => {
+    useComment();
+    handleOpen();
+  };
 
   return (
     <>
-      <Card className="w- mx-auto">
+      <Card className="w-full max-h-[80vh] overflow-y-auto">
         <div className="px-4 py-3 text-center font-bold text-xl text-[#030712]">
           評價
         </div>
         <hr className="border-gray-300" />
 
-        <div className="container mx-auto flex-row items-center justify-start ml-8  py-4">
+        <div className="container w-full mx-auto flex-row items-center justify-start px-8 py-4">
           <div className="flex items-center mt-2 mb-2">
             <p className="text-[#030712] text-xl  me-2 text-left font-bold">
               服務
@@ -120,7 +137,7 @@ export default function Comment() {
           </div>
         </div>
         <hr className="border-gray-300 w-11/12 mx-auto" />
-        <div className="container mx-auto flex-col items-center justify-start ml-8 py-4">
+        <div className="container mx-auto flex-col items-center justify-start px-8 py-4">
           <div className="flex items-center mb-2">
             <p className="text-[#030712] text-xl me-2 mb-2 text-left font-bold">
               咖啡廳風格
@@ -134,31 +151,34 @@ export default function Comment() {
           >
             <Button
               className={`${
-                activeButton === "guest" ? "bg-black text-white" : ""
+                activeButton === true ? "bg-black text-white" : ""
               } hover:bg-black hover:text-white`}
-              onClick={() => handleButtonClick("guest")}
+              onClick={() => handleButtonClick(true)}
             >
               安靜
             </Button>
             <Button
               className={`${
-                activeButton === "store" ? "bg-black text-white" : ""
+                activeButton === false ? "bg-black text-white" : ""
               } hover:bg-black hover:text-white`}
-              onClick={() => handleButtonClick("store")}
+              onClick={() => handleButtonClick(false)}
             >
               熱鬧
             </Button>
           </ButtonGroup>
         </div>
         <hr className="border-gray-300 w-11/12 mx-auto" />
-        <div className="container mx-auto flex-col items-center justify-start ml-8 py-4">
+        <div className="container mx-auto flex-col items-center justify-start px-8 py-4">
           <div className="flex items-center mb-2">
             <p className="text-[#030712] text-xl me-2 mb-2 text-left font-bold">
               評價
             </p>
           </div>
           <div className="w-[87%]">
-            <Textarea label="非常歡迎有話直說" />
+            <Textarea
+              label="非常歡迎有話直說"
+              onChange={(e) => setword(e.target.value)}
+            />
           </div>
         </div>
         <hr className="border-gray-300 w-full mx-auto" />
@@ -167,7 +187,10 @@ export default function Comment() {
           <p className="ml-8 text-[#030712] text-md text-left font-bold border-b border-black">
             清除全部
           </p>
-          <Button className="bg-[#D0B8A8] px-6 py-2 text-lg mr-8 mb-3">
+          <Button
+            className="bg-[#D0B8A8] px-6 py-2 text-lg mr-8 mb-3"
+            onClick={handleCommentSubmit}
+          >
             送出評論
           </Button>
         </div>
