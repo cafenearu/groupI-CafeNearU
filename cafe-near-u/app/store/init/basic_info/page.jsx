@@ -3,11 +3,8 @@
 import "react-time-picker/dist/TimePicker.css";
 import HeaderStore from "../../../components/storeside/HeaderStore";
 import InfoUpdateForm from "../../../components/storeside/InfoUpdateForm";
-import { useState } from "react";
 
 export default function Home() {
-    const [disabled, setDisabled] = useState(false);
-    const [time, onChange] = useState("10:00");
     return (
         <>
             <HeaderStore />

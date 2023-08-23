@@ -14,7 +14,13 @@ import {
     Tabs,
 } from "@material-tailwind/react";
 
-export default function StatusUpdate({ open, handleOpen, data }) {
+const data = [
+    { label: "座位ㄧ", value: 1 },
+    { label: "座位二", value: 2 },
+    { label: "座位三", value: 3 },
+    { label: "座位四", value: 4 },
+];
+export default function StatusUpdate({ open, handleOpen }) {
     return (
         <Dialog
             size="md"

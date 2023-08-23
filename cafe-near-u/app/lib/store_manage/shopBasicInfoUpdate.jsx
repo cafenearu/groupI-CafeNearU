@@ -11,7 +11,7 @@ export default function shopBasicInfoUpdate(token, formData) {
             body,
             method: "PUT",
         }
-    ).then((res) => res.json());
+    ).then((res) => res.status);
 
     return data;
 }
