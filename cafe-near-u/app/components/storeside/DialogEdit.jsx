@@ -16,7 +16,7 @@ export default function DialogEdit({ open, handleOpen, type }) {
         return <SeatSet open={open} handleOpen={handleOpen} />;
     } else if (type === 2) {
         // 設定基本資料
-        return <InfoUpdate open={open} handleOpen={handleOpen} />;
+        return <InfoUpdate open={open} handleOpen={handleOpen} edit={true} />;
     } else if (type === 3) {
         // 設定菜單資料
         return <MenuUpdate open={open} handleOpen={handleOpen} />;

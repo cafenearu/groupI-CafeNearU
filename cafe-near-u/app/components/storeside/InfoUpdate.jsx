@@ -3,29 +3,12 @@ import {
     DialogBody,
     DialogFooter,
     DialogHeader,
-    Input,
-    Select,
-    Option,
-    Textarea,
-    ListItemSuffix,
-    IconButton,
-    Typography,
     Button,
-    Card,
-    List,
-    ListItem,
-    Tabs,
-    Tab,
-    TabsHeader,
-    TabsBody,
-    TabPanel,
-    Checkbox,
-    ListItemPrefix,
 } from "@material-tailwind/react";
 import "react-time-picker/dist/TimePicker.css";
 import InfoUpdateForm from "./InfoUpdateForm";
 
-export default function InfoUpdate({ open, handleOpen }) {
+export default function InfoUpdate({ open, handleOpen, edit = false }) {
     return (
         <Dialog
             size="xxl"
@@ -57,23 +40,8 @@ export default function InfoUpdate({ open, handleOpen }) {
                 </svg>
             </div>
             <DialogBody className="flex flex-col lg:container lg:mx-auto">
-                <InfoUpdateForm />
+                <InfoUpdateForm edit={edit} handleOpen={handleOpen} />
             </DialogBody>
-            <DialogFooter className="space-x-4 lg:container lg:mx-auto">
-                <Button
-                    variant="outlined"
-                    onClick={handleOpen}
-                    className="text-base px-6 border border-[#7D6E83] text-[#7D6E83] "
-                >
-                    關閉
-                </Button>
-                <Button
-                    onClick={handleOpen}
-                    className="text-base px-6 bg-[#7D6E83] text-white"
-                >
-                    更新
-                </Button>
-            </DialogFooter>
         </Dialog>
     );
 }

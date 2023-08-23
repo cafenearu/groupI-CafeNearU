@@ -2,22 +2,24 @@
 
 import { Carousel, Dialog } from "@material-tailwind/react";
 import { useState, useEffect } from "react";
-import Addwish from "./Like.jsx";
+import Addwish from "./Like";
 import Cookies from "js-cookie";
 
 export default function StoreCard({ className, store }) {
-  const cookieValue = Cookies.get("token");
-  const {
-    id,
-    name,
-    primary_image,
-    wishlist_item,
-    operating_status,
-    min_order,
-    seats,
-  } = store;
+    const cookieValue = Cookies.get("token");
+    const {
+        id,
+        name,
+        primary_image,
+        wishlist_item,
+        operating_status,
+        min_order,
+        seats,
+    } = store;
+    console.log("store->", store);
+    console.log("seats->", seats);
+    let seat = seats.some((elem) => elem.available_seats);
 
-  let seat = seats.some((elem) => elem.available_seats);
   const [liked, setLiked] = useState(false);
   const [open, setOpen] = useState(false);
   const toggleLike = () => {
@@ -35,14 +37,18 @@ export default function StoreCard({ className, store }) {
     console.log(wishlist_item);
   }, []);
 
-  const handleOpen = () => setOpen((cur) => !cur);
+    const handleOpen = () => setOpen((cur) => !cur);
 
-  // const handleClose = () => setOpen((cur) => !cur);
-  const handleClose = async () => {
-    const cafe = Cookies.get("storeid");
-    const token = Cookies.get("token");
-    console.log(id);
-    // preventDefault();
+    // const handleClose = () => setOpen((cur) => !cur);
+    const handleClose = async () => {
+        const cafe = Cookies.get("storeid");
+        const token = Cookies.get("token");
+        console.log(id);
+        // preventDefault();
+
+
+
+
 
     try {
       const requestData = {
@@ -123,14 +129,8 @@ export default function StoreCard({ className, store }) {
               viewBox="0 0 24 24"
               stroke="currentColor"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
-              />
-            </svg>
-          )}
+                <Addwish />
+            </Dialog>
         </div>
       )}
       <Dialog

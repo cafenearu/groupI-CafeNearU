@@ -6,6 +6,7 @@ import DialogEdit from "../components/storeside/DialogEdit";
 
 import useStoreBasicInfo from "../lib/store_manage/useStoreBasicInfo";
 import useStatus from "../lib/store_manage/useStatus";
+import useOwnerStatus from "../lib/store_manage/useOwnerStatus";
 
 import Cookies from "js-cookie";
 
@@ -13,25 +14,31 @@ export default function Home() {
     const [open, setOpen] = useState(false);
     const [type, setType] = useState(0);
 
-    console.log(Cookies.get("userId"));
+    console.log(Cookies.get());
 
-    const { isError } = useStoreBasicInfo(Cookies.get("userId"));
-    if (isError?.status === 404) {
+    const { newOwner } = useOwnerStatus(Cookies.get("tokenOwner"));
+    console.log(newOwner);
+
+    if (newOwner) {
         window.location.replace("/store/init/basic_info");
     }
-    if (isError) {
-        return <div>{`發生錯誤 ${isError}`}</div>;
-    }
+
+    const handleLogout = () => {
+        Cookies.remove("tokenOwner");
+        Cookies.remove("token");
+        Cookies.remove("ownerId");
+        // Cookies.remove("postid");
+        window.location.href = "/"; // 登出後重定向至登入頁面
+    };
 
     const handleOpen = () => {
         setOpen((cur) => !cur);
     };
     return (
         <>
-            <HeaderStore />
-            {/*
-                <DialogEdit open={open} handleOpen={handleOpen} type={type} />
-    */}
+            <HeaderStore handleLogout={handleLogout} />
+
+            <DialogEdit open={open} handleOpen={handleOpen} type={type} />
             <div className="h-80 lg:container lg:mx-auto flex flex-col justify-end border-b">
                 <span className="text-4xl mb-8 mx-2 font-light flex flex-col md:flex-row">
                     <div className="font-medium ml-2 mb-2 md:mb-0 md:ml-0">

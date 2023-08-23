@@ -25,6 +25,8 @@ import "react-time-picker/dist/TimePicker.css";
 import { useFormik } from "formik";
 import { useState } from "react";
 import { useLoadScript, GoogleMap, Marker } from "@react-google-maps/api";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import usePlacesAutocomplete, {
     getGeocode,
@@ -123,7 +125,6 @@ const AutoComplete = ({ setPos, formik }) => {
     const handleInput = (e) => {
         // Update the keyword of the input element
         setValue(e.target.value);
-        formik.setFieldValue("storeAddress", e.target.value);
     };
 
     const handleSelect =
@@ -132,6 +133,7 @@ const AutoComplete = ({ setPos, formik }) => {
             // When user selects a place, we can replace the keyword without request data from API
             // by setting the second parameter to "false"
             setValue(description, false);
+            formik.setFieldValue("storeAddress", description);
             clearSuggestions();
 
             // Get latitude and longitude via utility functions
@@ -190,7 +192,7 @@ const AutoComplete = ({ setPos, formik }) => {
     );
 };
 
-export default function InfoUpdateForm() {
+export default function InfoUpdateForm({ edit = false, handleOpen }) {
     const [timeFrom, setTimeFrom] = useState([
         "00:00",
         "00:00",
@@ -223,6 +225,7 @@ export default function InfoUpdateForm() {
     const [ruleList, setRuleList] = useState([]);
     const [serviceList, setServiceList] = useState([]);
     const [file, setFile] = useState([]);
+    const [formFile, setFormFile] = useState([]);
     const formik = useFormik({
         initialValues: {
             storeName: "",
@@ -258,6 +261,7 @@ export default function InfoUpdateForm() {
             },
         },
         onSubmit: async (values) => {
+            console.log(file);
             const formData = new FormData();
             formData.append("name", values.storeName);
             formData.append("type", values.storeType);
@@ -314,26 +318,31 @@ export default function InfoUpdateForm() {
             let services = [];
             services.push({
                 id: 1,
+                icon: "plug",
                 type: "plug",
                 content: values.services.socket,
             });
             services.push({
                 id: 2,
+                icon: "wifi",
                 type: "wifi",
                 content: values.services.wifi,
             });
             services.push({
                 id: 3,
+                icon: "smoke",
                 type: "smoke",
                 content: values.services.smoke,
             });
             services.push({
                 id: 4,
+                icon: "cat",
                 type: "cat",
                 content: values.services.cat,
             });
             services.push({
                 id: 5,
+                icon: "dog",
                 type: "dog",
                 content: values.services.dog,
             });
@@ -341,6 +350,7 @@ export default function InfoUpdateForm() {
             serviceList.map((item, index) => {
                 services.push({
                     id: index + 6,
+                    icon: "customize",
                     type: "customize",
                     content: item.title,
                 });
@@ -350,26 +360,65 @@ export default function InfoUpdateForm() {
             formData.append("closing_hour", JSON.stringify(timeTo));
 
             // images
-            formData.append("primary_image", file[0]);
-            formData.append("secondary_image_1", file[1] ? file[1] : "");
-            formData.append("secondary_image_2", file[2] ? file[2] : "");
+
+            formData.append("primary_image", formFile[0]);
+            formData.append(
+                "secondary_image_1",
+                formFile[1] ? formFile[1] : ""
+            );
+            formData.append(
+                "secondary_image_2",
+                formFile[2] ? formFile[2] : ""
+            );
 
             for (let pair of formData.entries()) {
                 console.log(pair[0] + ", " + pair[1]);
             }
 
             const res = await shopBasicInfoUpdate(
-                Cookies.get("token"),
+                Cookies.get("tokenOwner"),
                 formData
             );
 
             console.log(res);
+
+            if (res === 200 && edit) {
+                handleOpen();
+                toast.success("更新成功", {
+                    position: "top-right",
+                    autoClose: 4999,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
+            } else if (res !== 200 && edit) {
+                handleOpen();
+                toast.error(`更新失敗 (Error: ${data})`, {
+                    position: "top-right",
+                    autoClose: 4999,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
+            }
+            console.log(edit);
+            if (res === 200 && !edit) {
+                console.log("success");
+                window.location.replace("/store/init/menu_info");
+            }
         },
     });
 
     function handleChange(e) {
         console.log(e.target.files);
         const arr = Array.from(e.target.files).slice(0, 3);
+        setFormFile(arr);
         setFile(arr.map((f) => URL.createObjectURL(f)));
     }
 
@@ -1035,14 +1084,45 @@ export default function InfoUpdateForm() {
                     ))}
             </div>
             <div className="col-span-12 h-[0.5px]  bg-gray-500 my-2"></div>
-            <div className="col-span-12 space-x-4 lg:container lg:mx-auto flex flex-row justify-end">
-                <Button
-                    type="submit"
-                    className="w-full lg:w-40 text-base px-6 mb-4 bg-[#7D6E83] text-white"
-                >
-                    儲存並繼續
-                </Button>
-            </div>
+            {!edit ? (
+                <div className="col-span-12 space-x-4 lg:container lg:mx-auto flex flex-row justify-end">
+                    <Button
+                        type="submit"
+                        className="w-full lg:w-40 text-base px-6 mb-4 bg-[#7D6E83] text-white"
+                    >
+                        儲存並繼續
+                    </Button>
+                </div>
+            ) : (
+                <div className="col-span-12 gap-4 flex flex-row lg:container lg:mx-auto justify-end">
+                    {" "}
+                    <Button
+                        variant="outlined"
+                        onClick={handleOpen}
+                        className="text-base px-6 border border-[#7D6E83] text-[#7D6E83] "
+                    >
+                        關閉
+                    </Button>
+                    <Button
+                        type="submit"
+                        className="text-base px-6 bg-[#7D6E83] text-white"
+                    >
+                        更新
+                    </Button>
+                </div>
+            )}
+            <ToastContainer
+                position="top-right"
+                autoClose={4999}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
         </form>
     );
 }
