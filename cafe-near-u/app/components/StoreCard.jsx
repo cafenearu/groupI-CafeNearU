@@ -5,8 +5,9 @@ import { useState, useEffect } from "react";
 import Addwish from "./Like.jsx";
 import Cookies from "js-cookie";
 
-export default function StoreCard({ className, store }) {
+export default function StoreCard({ className, store, nolike }) {
   const cookieValue = Cookies.get("token");
+
   const {
     id,
     name,

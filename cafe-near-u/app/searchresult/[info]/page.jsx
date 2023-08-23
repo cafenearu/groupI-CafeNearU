@@ -75,7 +75,7 @@ export default function h() {
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
         />
 
-        <div className="flex w-full items-end mt-24 gap-8 mb-3 flex-nowrap  ">
+        <div className="flex w-full items-end mt-24 gap-8 mb-3 flex-nowrap h-[100px]  ">
           <div className="flex mb-4 w-[60px] flex-col justify-center items-center relative">
             <IconButton variant="text" className="rounded-full">
               <span className="material-symbols-outlined">home</span>
@@ -229,6 +229,7 @@ export default function h() {
           </div>
 
           <div className="col-span-9 md:hidden h-[300px] bg-gray-200 "></div>
+
           <div className="col-span-9 grid grid-cols-9 gap-4 justify-center">
             {searchResult.map((store) => (
               <StoreCard
@@ -237,13 +238,6 @@ export default function h() {
                 store={store}
               />
             ))}
-            {/* {storesHome.data.shops.leisure.map((store) => (
-              <StoreCard
-                className={"rounded-xl  col-span-6 lg:col-span-3"}
-                key={store.id}
-                store={store}
-              />
-            ))} */}
           </div>
         </div>
         <div className="hidden md:block w-[30%] h-[920px] bg-gray-200 "></div>
