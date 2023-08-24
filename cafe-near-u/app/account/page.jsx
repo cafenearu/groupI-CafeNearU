@@ -129,9 +129,14 @@ export default function h() {
           className="w-64 h-64 object-cover"
         />
 
-        {/* <div className="text-lg absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-50 text-white opacity-0 group-hover:opacity-100 transition-opacity rounded-full">
+        <div
+          className="text-lg absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-50 text-white opacity-0 group-hover:opacity-100 transition-opacity rounded-full"
+          onDrop={handleDrop}
+          onDragOver={handleDragOver}
+          style={{ cursor: "pointer" }}
+        >
           <p>拖曳於此編輯大頭貼</p>
-        </div> */}
+        </div>
       </div>
 
       <div className="ml-[10%] w-[30%]">

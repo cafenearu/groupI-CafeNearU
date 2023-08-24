@@ -54,7 +54,7 @@ export default function StoreDetail() {
           <img
             src="../cat.gif"
             alt="cafe"
-            className="block mb-4  w-[20%] h-28 text-gray-600 mt-28"
+            className="block mb-4  w-[20%] h-auto text-gray-600 mt-28"
           />
           <div className="container mx-auto flex-col md:flex-row flex items-center justify-center">
             <p className="text-gray-600 text-2xl mb-2 me-4 font-logo">
